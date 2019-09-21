@@ -1,52 +1,42 @@
-import React, { Component } from 'react'
-import { Button, Header, Image, Modal } from 'semantic-ui-react'
+import React, { Component } from "react";
+import { Button, Modal, Icon } from "semantic-ui-react";
+import Register from "./Register";
 
 class ModalExampleDimmer extends Component {
-  state = { open: false }
+  state = { open: false };
 
-  show = (dimmer) => () => this.setState({ dimmer, open: true })
-  close = () => this.setState({ open: false })
+  show = dimmer => () => this.setState({ dimmer, open: true });
+  close = () => this.setState({ open: false });
 
   render() {
-    const { open, dimmer } = this.state
+    const { open, dimmer } = this.state;
 
     return (
       <div>
-        <Button onClick={this.show('blurring')}>Blurring</Button>
+        <Button onClick={this.show("blurring")} closeIcon>
+          Register
+        </Button>
 
-        <Modal dimmer={dimmer} open={open} onClose={this.close}>
-          <Modal.Header>Select a Photo</Modal.Header>
-          <Modal.Content image>
-            <Image
-              wrapped
-              size='medium'
-              src='https://react.semantic-ui.com/images/avatar/large/rachel.png'
-            />
+        <Modal size="tiny" dimmer={dimmer} open={open} onClose={this.close}>
+          <Modal.Header>Sign Up</Modal.Header>
+          <Modal.Content>
             <Modal.Description>
-              <Header>Default Profile Image</Header>
-              <p>
-                We've found the following gravatar image associated with your
-                e-mail address.
-              </p>
-              <p>Is it okay to use this photo?</p>
+              <Register />
             </Modal.Description>
           </Modal.Content>
           <Modal.Actions>
-            <Button color='black' onClick={this.close}>
+            <Button color="black" onClick={this.close}>
               Nope
             </Button>
             <Button
-              positive
-              icon='checkmark'
-              labelPosition='right'
-              content="Yep, that's me"
-              onClick={this.close}
+              color="violet"
+              content="Need to Register?"
             />
           </Modal.Actions>
         </Modal>
       </div>
-    )
+    );
   }
 }
 
-export default ModalExampleDimmer
+export default ModalExampleDimmer;
