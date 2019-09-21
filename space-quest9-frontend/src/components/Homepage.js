@@ -149,9 +149,6 @@ class MobileContainer extends Component {
           <Menu.Item as='a' active>
             Home
           </Menu.Item>
-          <Menu.Item as='a'>Work</Menu.Item>
-          <Menu.Item as='a'>Company</Menu.Item>
-          <Menu.Item as='a'>Careers</Menu.Item>
           <Menu.Item as='a'>Log in</Menu.Item>
           <Menu.Item as='a'>Sign Up</Menu.Item>
         </Sidebar>
@@ -203,9 +200,7 @@ ResponsiveContainer.propTypes = {
   children: PropTypes.node,
 }
 
-const HomepageLayout = () => (
-  <ResponsiveContainer>
-    
-  </ResponsiveContainer>
+const HomepageLayout = (props) => (
+  <ResponsiveContainer />
 )
 export default HomepageLayout
