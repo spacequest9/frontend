@@ -1,42 +1,64 @@
-import React, { Component } from "react";
-import { Button, Modal, Icon } from "semantic-ui-react";
-import Register from "./Register";
+import React, { useState } from "react";
+import axios from "axios";
+import { Button, Form } from "semantic-ui-react";
 
-class ModalExampleDimmer extends Component {
-  state = { open: false };
+const Login = props => {
+  const [user, setUser] = useState({
+    username: "",
+    password: "",
+  });
 
-  show = dimmer => () => this.setState({ dimmer, open: true });
-  close = () => this.setState({ open: false });
+  const handleSubmit = event => {
+    event.preventDefault();
+    axios
+      .post("https://lambda-mud-test.herokuapp.com/api/login", user)
+      .then(res => {
+        console.log(res);
+        // props.history.push("/game");
+      })
+      .catch(err => console.log("error from post", err));
+  };
 
-  render() {
-    const { open, dimmer } = this.state;
+  const handleChange = event => {
+    setUser({
+      ...user,
+      [event.target.name]: event.target.value
+    });
+  };
 
-    return (
-      <div>
-        <Button onClick={this.show("blurring")} closeIcon>
-          Register
-        </Button>
+  return (
+    <Form onSubmit={event => handleSubmit(event)}>
+      <Form.Group>
+        <Form.Input
+          label="Username"
+          name="username"
+          type="text"
+          value={user.username}
+          onChange={event => handleChange(event)}
+          width={16}
+        />
+      </Form.Group>
 
-        <Modal size="tiny" dimmer={dimmer} open={open} onClose={this.close}>
-          <Modal.Header>Sign Up</Modal.Header>
-          <Modal.Content>
-            <Modal.Description>
-              <Register />
-            </Modal.Description>
-          </Modal.Content>
-          <Modal.Actions>
-            <Button color="black" onClick={this.close}>
-              Nope
-            </Button>
-            <Button
-              color="violet"
-              content="Need to Register?"
-            />
-          </Modal.Actions>
-        </Modal>
-      </div>
-    );
-  }
-}
+      <Form.Group>
+        <Form.Input
+          label="Password"
+          name="password"
+          type="password"
+          value={user.password}
+          onChange={event => handleChange(event)}
+          width={16}
+        />
+      </Form.Group>
 
-export default ModalExampleDimmer;
+        <Button
+          type="submit"
+          positive
+          icon="checkmark"
+          labelPosition="right"
+          content="Submit"
+        />
+    </Form>
+  );
+};
+
+export default Login;

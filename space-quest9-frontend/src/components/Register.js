@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { Button, Checkbox, Form, Header } from "semantic-ui-react";
+import { Button, Form } from "semantic-ui-react";
 
 const Register = props => {
   const [user, setUser] = useState({
@@ -29,42 +29,47 @@ const Register = props => {
 
   return (
     <Form onSubmit={event => handleSubmit(event)}>
-      <Form.Field>
-        <label>Username</label>
-        <input
+      <Form.Group>
+        <Form.Input
+          label="Username"
           name="username"
           type="text"
           value={user.username}
           onChange={event => handleChange(event)}
+          width={9}
         />
-      </Form.Field>
+      </Form.Group>
 
-      <Form.Field>
-        <label>Password</label>
-        <input
+      <Form.Group>
+        <Form.Input
+          label="Password"
           name="password1"
           type="password"
           value={user.password1}
           onChange={event => handleChange(event)}
+          width={9}
         />
-      </Form.Field>
+      </Form.Group>
 
-      <Form.Field>
-        <label>Password</label>
-        <input
+      <Form.Group>
+        <Form.Input
+          label="Repeat Password"
           name="password2"
           type="password"
           value={user.password2}
           onChange={event => handleChange(event)}
+          width={9}
         />
-      </Form.Field>
-      <Button
-        type="submit"
-        positive
-        icon="checkmark"
-        labelPosition="right"
-        content="Submit"
-      />
+      </Form.Group>
+      {/* <Form.Group> */}
+        <Button
+          type="submit"
+          positive
+          icon="checkmark"
+          labelPosition="right"
+          content="Submit"
+        />
+      {/* </Form.Group> */}
     </Form>
   );
 };
