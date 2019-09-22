@@ -4,10 +4,6 @@ import Navbar from "./Navbar";
 import Login from "./Login";
 
 const Homepage = props => {
-  const [open, setOpen] = useState(false);
-
-  const show = () => setOpen(true);
-  const close = () => setOpen(false);
 
   return (
     <div className="homepage-container">
@@ -19,13 +15,13 @@ const Homepage = props => {
         <Modal.Content>
           <Login />
         </Modal.Content>
-        <Modal.Actions>
+        {/* <Modal.Actions>
             <Button
               color="violet"
               content="Need to Register?"
               onClick={() => props.history.push('/register')}
             />
-          </Modal.Actions>
+          </Modal.Actions> */}
       </Modal>
     </div>
   );
