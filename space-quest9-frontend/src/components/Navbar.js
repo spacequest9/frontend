@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Button, Menu, Modal } from "semantic-ui-react";
-import Register from './Register';
+import Register from "./Register";
 
 export default class MenuExampleSizeSmall extends Component {
   state = { activeItem: "home" };
@@ -12,26 +12,26 @@ export default class MenuExampleSizeSmall extends Component {
 
     return (
       <Menu size="small" inverted>
-        <Menu.Item
-          name="home"
-          active={activeItem === "home"}
-          onClick={this.handleItemClick}
-        />
-        <Menu.Item
-          name="Logout"
-          active={activeItem === "Logout"}
-          onClick={this.handleItemClick}
-        />
+        <Menu.Item>
+          <Modal size="tiny" trigger={<Button>Register</Button>} closeIcon>
+            <Modal.Header>Register</Modal.Header>
+            <Modal.Content>
+              <Register />
+            </Modal.Content>
+          </Modal>
+        </Menu.Item>
 
         <Menu.Menu position="right">
-          <Menu.Item>
-            <Modal size="tiny" trigger={<Button>Register</Button>} closeIcon>
-              <Modal.Header>Register</Modal.Header>
-              <Modal.Content>
-                <Register />
-              </Modal.Content>
-            </Modal>
-          </Menu.Item>
+          <Menu.Item
+            name="Login"
+            active={activeItem === "Login"}
+            //onClick={this.handleItemClick}
+          />
+          <Menu.Item
+            name="Logout"
+            active={activeItem === "Logout"}
+            //onClick={this.handleItemClick}
+          />
         </Menu.Menu>
       </Menu>
     );

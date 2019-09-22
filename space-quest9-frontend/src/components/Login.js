@@ -14,7 +14,8 @@ const Login = props => {
       .post("https://lambda-mud-test.herokuapp.com/api/login", user)
       .then(res => {
         console.log(res);
-        // props.history.push("/game");
+        localStorage.setItem('token', res.data.token)
+        //props.history.push("/game");
       })
       .catch(err => console.log("error from post", err));
   };

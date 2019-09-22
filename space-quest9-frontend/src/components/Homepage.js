@@ -15,13 +15,6 @@ const Homepage = props => {
         <Modal.Content>
           <Login />
         </Modal.Content>
-        {/* <Modal.Actions>
-            <Button
-              color="violet"
-              content="Need to Register?"
-              onClick={() => props.history.push('/register')}
-            />
-          </Modal.Actions> */}
       </Modal>
     </div>
   );

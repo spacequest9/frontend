@@ -12,9 +12,9 @@ const Register = props => {
   const handleSubmit = event => {
     event.preventDefault();
     axios
-      .post("https://lambda-mud-test.herokuapp.com/api/register", user)
+      .post("https://lambda-mud-test.herokuapp.com/api/registration", user)
       .then(res => {
-        console.log(res);
+        console.log('in handleSubmit',res);
         props.history.push("/login");
       })
       .catch(err => console.log("error from post", err));
@@ -36,7 +36,7 @@ const Register = props => {
           type="text"
           value={user.username}
           onChange={event => handleChange(event)}
-          width={9}
+          width={16}
         />
       </Form.Group>
 
@@ -47,7 +47,7 @@ const Register = props => {
           type="password"
           value={user.password1}
           onChange={event => handleChange(event)}
-          width={9}
+          width={16}
         />
       </Form.Group>
 
@@ -58,10 +58,9 @@ const Register = props => {
           type="password"
           value={user.password2}
           onChange={event => handleChange(event)}
-          width={9}
+          width={16}
         />
       </Form.Group>
-      {/* <Form.Group> */}
         <Button
           type="submit"
           positive
@@ -69,7 +68,6 @@ const Register = props => {
           labelPosition="right"
           content="Submit"
         />
-      {/* </Form.Group> */}
     </Form>
   );
 };
