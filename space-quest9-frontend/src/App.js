@@ -3,7 +3,7 @@ import { Route, Link } from 'react-router-dom';
 import Login from './components/Login'
 import Register from './components/Register'
 import Homepage from './components/Homepage'
-import Canvas from './components/Canvas'
+import GameUI from './components/GameUI'
 import './App.css';
 
 function App() {
@@ -13,7 +13,7 @@ function App() {
       <Route exact path = "/" component = {Homepage}></Route>
       <Route path = "/login" component = {Login}></Route>
       <Route path = "/register" component = {Register}></Route>
-      <Route exact path = "/game" component = {Canvas}></Route>
+      <Route exact path = "/game" component = {GameUI}></Route>
     </div>
   );
 }
