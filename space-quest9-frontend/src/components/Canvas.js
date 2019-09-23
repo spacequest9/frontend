@@ -25,52 +25,96 @@ class Canvas extends Component {
       y: 50,
     },
     neighbors: {
-
+      to_n: 0,
+      to_s: 1,
+      to_e: 2,
+      to_w: 3
     }
   }
 
+  rooms = [
+    {
+      name: 'Sector 1',
+      description: 'Bright and green',
+      x: 400,
+      y: 300,
+      to_n: 1,
+      to_s: 2,
+      to_e: null,
+      to_w: 1
+    },
+    {
+      name: 'Sector 2',
+      description: 'Bright and green',
+      x: 100,
+      y: 200,
+      to_n: 2,
+      to_s: 2,
+      to_e: 0,
+      to_w: null
+    },
+    {
+      name: 'Sector 3',
+      description: 'Bright and green',
+      x: 300,
+      y: 300,
+      to_n: 0,
+      to_s: 1,
+      to_e: 0,
+      to_w: 1
+    }
+  ]
+
+  // Map over the vertices with the location points from each room in room array
   vertices = [
     {
-      x: 200,
-      y: 100
-    },
-    {
       x: 100,
-      y: 100
+      y: 200
     },
     {
-      x: 200,
+      x: 400,
       y: 300
     },
     {
-      x: 350,
-      y: 70
-    },
-    {
       x: 300,
-      y: 230
+      y: 300
     }
   ]
 
   flyTo = direction => {
     console.log(direction)
-    console.log(this.state)
-    // if (this.vertices[0]){
-      if (direction === "up"){
-        this.setState({ location: {
-          x: 50,
-          y: 100,
-        }
+    const goTo = this.state.neighbors
+
+    if (this.rooms[goTo[direction]] !== null) {
+      if (goTo[direction] !== null) {
+        this.setState({ 
+          location: {
+            x: this.rooms[goTo[direction]].x,
+            y: this.rooms[goTo[direction]].y,
+          },
+          neighbors: {
+            to_n: this.rooms[goTo[direction]].to_n,
+            to_s: this.rooms[goTo[direction]].to_s,
+            to_e: this.rooms[goTo[direction]].to_e,
+            to_w: this.rooms[goTo[direction]].to_w
+          }
         })
+        console.log("x: ", this.rooms[goTo[direction]].x, "y: ", this.rooms[goTo[direction]].y)
       }
-    // }
+      else {
+        console.log('There is nothing in that direction.')
+      } 
+    }
+    else {
+      console.log("Room does not have that index number")
+    }
   }
   
   render() {
     const Button = styled.div`
       border: 1px solid white;
       `
-      console.log(this.state)
+      console.log("State: ", this.state)
     
     return (
       <>
@@ -122,7 +166,7 @@ class Canvas extends Component {
             duration={0.5}
             radiusX={5}
             radiusY={5}
-            fill='red'
+            fill='yellow'
             stroke='white'
             strokeWidth={0}
             shadowBlur={8}
@@ -131,10 +175,10 @@ class Canvas extends Component {
           />
         </Layer>
       </Stage>
-      <Button className="console" onClick={() => this.flyTo("up")}> 
+      <Button className="console" onClick={() => this.flyTo("to_n")}> 
         UP
       </Button>
-      <Button className="console" onClick={() => this.flyTo("down")}>
+      <Button className="console" onClick={() => this.flyTo("to_s")}>
         DOWN
       </Button>
       </>
