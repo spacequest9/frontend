@@ -66,20 +66,37 @@ class Canvas extends Component {
   ]
 
   // Map over the vertices with the location points from each room in room array
+  // vertices = []
+  // vertices = this.rooms.map(location => {
+  //   const newVertices = []
+  //   newVertices.push({'x': location.x, 'y': location.y})
+  //   return newVertices
+  // })
+  
   vertices = [
-    {
-      x: 100,
-      y: 200
-    },
-    {
-      x: 400,
-      y: 300
-    },
-    {
-      x: 300,
-      y: 300
-    }
+    this.rooms.map(location => {
+    // const newVertices = []
+    // newVertices.push({'x': location.x, 'y': location.y})
+    
+    return {'x': location.x, 'y': location.y}
+    // return newVertices
+  })
+  
   ]
+  // vertices = [
+  //   {
+  //     x: 100,
+  //     y: 200
+  //   },
+  //   {
+  //     x: 400,
+  //     y: 300
+  //   },
+  //   {
+  //     x: 300,
+  //     y: 300
+  //   }
+  // ]
 
   flyTo = direction => {
     console.log(direction)
@@ -113,7 +130,7 @@ class Canvas extends Component {
   render() {
     const Button = styled.div`
       border: 1px solid white;
-      `
+    `
       console.log("State: ", this.state)
     
     return (
@@ -140,13 +157,13 @@ class Canvas extends Component {
             shadowColor="white"
             shadowBlur={9}
             shadowOpacity={2}
-            points={[58.4,86.36, 62.4, 421.36, 81.4, 71.36, 61.4, 51.36]}
+            points={[58.4,86.36, 62.4, 421.36, 81.4, 71.36, 61.4, 51.36]} //Need to connect vertices to this
           />
-          {this.vertices.map( point => {
+          {this.vertices[0].map( point => {
             return(
               <Ellipse 
                 x={point.x}
-                y={point.x}
+                y={point.y}
                 radiusX={5}
                 radiusY={5}
                 fill='white'
@@ -176,10 +193,10 @@ class Canvas extends Component {
         </Layer>
       </Stage>
       <Button className="console" onClick={() => this.flyTo("to_n")}> 
-        UP
+        North
       </Button>
       <Button className="console" onClick={() => this.flyTo("to_s")}>
-        DOWN
+        South
       </Button>
       </>
     );
