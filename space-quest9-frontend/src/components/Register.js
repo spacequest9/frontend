@@ -2,20 +2,20 @@ import React, { useState } from "react";
 import axios from "axios";
 import { Button, Form } from "semantic-ui-react";
 
-const Login = props => {
+const Register = props => {
   const [user, setUser] = useState({
     username: "",
-    password: "",
+    password1: "",
+    password2: ""
   });
 
   const handleSubmit = event => {
     event.preventDefault();
     axios
-      .post("https://lambda-mud-test.herokuapp.com/api/login", user)
+      .post("https://lambda-mud-test.herokuapp.com/api/registration", user)
       .then(res => {
-        console.log(res);
-        localStorage.setItem('token', res.data.token)
-        //props.history.push("/game");
+        console.log('in handleSubmit',res);
+        props.history.push("/login");
       })
       .catch(err => console.log("error from post", err));
   };
@@ -43,14 +43,24 @@ const Login = props => {
       <Form.Group>
         <Form.Input
           label="Password"
-          name="password"
+          name="password1"
           type="password"
-          value={user.password}
+          value={user.password1}
           onChange={event => handleChange(event)}
           width={16}
         />
       </Form.Group>
 
+      <Form.Group>
+        <Form.Input
+          label="Repeat Password"
+          name="password2"
+          type="password"
+          value={user.password2}
+          onChange={event => handleChange(event)}
+          width={16}
+        />
+      </Form.Group>
         <Button
           type="submit"
           positive
@@ -62,4 +72,4 @@ const Login = props => {
   );
 };
 
-export default Login;
+export default Register;
