@@ -1,189 +1,92 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Konva from 'konva';
-import { Stage, Layer, Shape, Ellipse, Circle } from 'react-konva';
+import { Stage, Layer, Ellipse, Circle, Path } from 'react-konva';
 import styled from 'styled-components';
 
 const RoomPaths = props => {
   const flightPath=(context, shape) => {
     context.beginPath();
-    context.moveTo(100, 50);
-    context.lineTo(props.points[0], props.points[1]);
+    context.moveTo(props.points[0], props.points[1]);
     context.lineTo(props.points[2], props.points[3]);
-    context.lineTo(props.points[4], props.points[5]);
-    context.lineTo(props.points[6], props.points[7]);
-    // context.quadraticCurveTo(props.points[0], props.points[1], props.points[2], props.points[3], props.points[4], props.points[5],  props.points[6],  props.points[7]);
-    // context.closePath();
     // (!) Konva specific method, it is very important
     context.fillStrokeShape(shape);
   }
-  return <Shape {...props} sceneFunc={flightPath} />
+  return <Path {...props} sceneFunc={flightPath} />
 }
-class Canvas extends Component {
-  state = {
-    location: {
-      x: 300,
-      y: 50,
-    },
-    neighbors: {
-      to_n: 0,
-      to_s: 1,
-      to_e: 2,
-      to_w: 3
-    }
-  }
 
-  rooms = [
-    {
-      name: 'Sector 1',
-      description: 'Bright and green',
-      x: 400,
-      y: 300,
-      to_n: 1,
-      to_s: 2,
-      to_e: null,
-      to_w: 1
-    },
-    {
-      name: 'Sector 2',
-      description: 'Bright and green',
-      x: 100,
-      y: 200,
-      to_n: 2,
-      to_s: 2,
-      to_e: 0,
-      to_w: null
-    },
-    {
-      name: 'Sector 3',
-      description: 'Bright and green',
-      x: 300,
-      y: 300,
-      to_n: 0,
-      to_s: 1,
-      to_e: 0,
-      to_w: 1
-    }
-  ]
+function Canvas(props) {
+   
+  console.log("State: ", props.vertices)
 
-  // Map over the vertices with the location points from each room in room array
-  vertices = [
-    {
-      x: 100,
-      y: 200
-    },
-    {
-      x: 400,
-      y: 300
-    },
-    {
-      x: 300,
-      y: 300
-    }
-  ]
+  const pointList = []
 
-  flyTo = direction => {
-    console.log(direction)
-    const goTo = this.state.neighbors
+  props.vertices[0].map(location => { 
+    pointList.push(location.x) 
+    pointList.push(location.y)
+  })
 
-    if (this.rooms[goTo[direction]] !== null) {
-      if (goTo[direction] !== null) {
-        this.setState({ 
-          location: {
-            x: this.rooms[goTo[direction]].x,
-            y: this.rooms[goTo[direction]].y,
-          },
-          neighbors: {
-            to_n: this.rooms[goTo[direction]].to_n,
-            to_s: this.rooms[goTo[direction]].to_s,
-            to_e: this.rooms[goTo[direction]].to_e,
-            to_w: this.rooms[goTo[direction]].to_w
-          }
-        })
-        console.log("x: ", this.rooms[goTo[direction]].x, "y: ", this.rooms[goTo[direction]].y)
-      }
-      else {
-        console.log('There is nothing in that direction.')
-      } 
-    }
-    else {
-      console.log("Room does not have that index number")
+  let part = []
+  let j = 0;
+  for(let i = 0; i <= pointList.length; i++){
+    while ( j <= pointList.length-1) {
+      part.push([pointList[j], pointList[j+1], pointList[j+2], pointList[j+3]])
+      j = j + 4
     }
   }
   
-  render() {
-    const Button = styled.div`
-      border: 1px solid white;
-      `
-      console.log("State: ", this.state)
-    
-    return (
-      <>
-      <Stage width={window.innerWidth} height={window.innerHeight/2 + 200}>
-        <Layer>
-          {/* <Shape
-            sceneFunc={(context, shape) => {
-              context.beginPath();
-              context.moveTo(200, 50);
-              context.lineTo(220, 80);
-              context.quadraticCurveTo(150, 100, 260, 170);
-              context.closePath();
-              // (!) Konva specific method, it is very important
-              context.fillStrokeShape(shape);
-            }}
-            // fill="#00D2FF"
-            stroke="white"
-            strokeWidth={1}
-          /> */}
-          <RoomPaths
-            stroke="white"
-            strokeWidth={.5}
-            shadowColor="white"
-            shadowBlur={9}
-            shadowOpacity={2}
-            points={[58.4,86.36, 62.4, 421.36, 81.4, 71.36, 61.4, 51.36]}
-          />
-          {this.vertices.map( point => {
-            return(
-              <Ellipse 
-                x={point.x}
-                y={point.x}
-                radiusX={5}
-                radiusY={5}
-                fill='white'
-                stroke='white'
-                strokeWidth={0}
-                shadowBlur={8}
-                shadowColor='white'
-              />
-              )
-            })
-          }
-          <Ellipse
-            name="player1" 
-            x={this.state.location["x"]}
-            y={this.state.location["y"]}
-            translate={this.state.location["x"], this.state.location["y"]}
-            duration={0.5}
-            radiusX={5}
-            radiusY={5}
-            fill='yellow'
-            stroke='white'
-            strokeWidth={0}
-            shadowBlur={8}
-            shadowColor='white'
-            move
-          />
-        </Layer>
-      </Stage>
-      <Button className="console" onClick={() => this.flyTo("to_n")}> 
-        UP
-      </Button>
-      <Button className="console" onClick={() => this.flyTo("to_s")}>
-        DOWN
-      </Button>
-      </>
-    );
-  }
+  return (
+    <Stage width={window.innerWidth} height={window.innerHeight/2 + 200}>
+      <Layer>
+        {part.map((point, i) => {
+          return(
+            <RoomPaths
+              key={i}
+              stroke="white"
+              strokeWidth={.5}
+              shadowColor="white"
+              shadowBlur={9}
+              shadowOpacity={2}
+              points={point}
+            />
+            )
+          })
+        }
+        
+        {props.vertices[0].map((point, i) => {
+          return(
+            <Ellipse 
+              key={i}
+              x={point.x}
+              y={point.y}
+              radiusX={5}
+              radiusY={5}
+              fill='white'
+              stroke='white'
+              strokeWidth={0}
+              shadowBlur={8}
+              shadowColor='white'
+            />
+            )
+          })
+        }
+        <Ellipse
+          name="player1" 
+          x={props.info.location["x"]}
+          y={props.info.location["y"]}
+          translate={props.info.location["x"], props.info.location["y"]}
+          duration={0.5}
+          radiusX={5}
+          radiusY={5}
+          fill='yellow'
+          stroke='white'
+          strokeWidth={0}
+          shadowBlur={8}
+          shadowColor='white'
+          move
+        />
+      </Layer>
+    </Stage>
+  );
 }
 
 export default Canvas
