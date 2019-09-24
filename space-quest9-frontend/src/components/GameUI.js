@@ -59,7 +59,7 @@ class GameUI extends Component {
 
   // Map over the vertices with the location points from each room in room array
   vertices = [
-    this.rooms.map(location => {    
+    this.rooms.map(location => { 
       return {'x': location.x, 'y': location.y}
     })
   ]

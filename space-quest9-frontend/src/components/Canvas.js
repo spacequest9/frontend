@@ -7,10 +7,11 @@ const RoomPaths = props => {
   const flightPath=(context, shape) => {
     context.beginPath();
     context.moveTo(100, 50);
-    context.lineTo(props.points[0], props.points[1]);
-    context.lineTo(props.points[2], props.points[3]);
-    context.lineTo(props.points[4], props.points[5]);
-    context.lineTo(props.points[6], props.points[7]);
+
+    for(let i = 0; i < props.points.length-1; i++) {
+      // console.log(props.points[i], props.points[i+1])
+      context.lineTo(props.points[i], props.points[i+1]);
+    }
     // context.quadraticCurveTo(props.points[0], props.points[1], props.points[2], props.points[3], props.points[4], props.points[5],  props.points[6],  props.points[7]);
     // context.closePath();
     // (!) Konva specific method, it is very important
@@ -18,38 +19,33 @@ const RoomPaths = props => {
   }
   return <Shape {...props} sceneFunc={flightPath} />
 }
+
 function Canvas(props) {
    
-  console.log("State: ", props.info)
+  console.log("State: ", props.vertices)
+
+  const pointList = []
+
+  props.vertices[0].map(location => { 
+    pointList.push(location.x) 
+    pointList.push(location.y)
+  })
   
   return (
     <Stage width={window.innerWidth} height={window.innerHeight/2 + 200}>
       <Layer>
-        {/* <Shape   NOT THIS ONE
-          sceneFunc={(context, shape) => {
-            context.beginPath();
-            context.moveTo(200, 50);
-            context.lineTo(220, 80);
-            context.quadraticCurveTo(150, 100, 260, 170);
-            context.closePath();
-            // (!) Konva specific method, it is very important
-            context.fillStrokeShape(shape);
-          }}
-          // fill="#00D2FF"
-          stroke="white"
-          strokeWidth={1}
-        /> */}
         <RoomPaths
           stroke="white"
           strokeWidth={.5}
           shadowColor="white"
           shadowBlur={9}
           shadowOpacity={2}
-          points={[58.4,86.36, 62.4, 421.36, 81.4, 71.36, 61.4, 51.36]} //Need to connect vertices to this
+          points={pointList}
         />
-        {props.vertices[0].map( point => {
+        {props.vertices[0].map((point, i) => {
           return(
             <Ellipse 
+              key={i}
               x={point.x}
               y={point.y}
               radiusX={5}
