@@ -54,6 +54,36 @@ class GameUI extends Component {
       to_s: 1,
       to_e: 0,
       to_w: 1
+    },
+    {
+      name: 'Sector 4',
+      description: 'Bright and green',
+      x: 500,
+      y: 200,
+      to_n: 0,
+      to_s: 1,
+      to_e: 0,
+      to_w: 1
+    },
+    {
+      name: 'Sector 5',
+      description: 'Bright and green',
+      x: 100,
+      y: 50,
+      to_n: 0,
+      to_s: 1,
+      to_e: 0,
+      to_w: 1
+    },
+    {
+      name: 'Sector 6',
+      description: 'Bright and green',
+      x: 400,
+      y: 400,
+      to_n: 2,
+      to_s: 1,
+      to_e: 0,
+      to_w: 1
     }
   ]
 

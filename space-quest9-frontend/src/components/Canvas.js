@@ -1,23 +1,17 @@
 import React from 'react';
 import Konva from 'konva';
-import { Stage, Layer, Shape, Ellipse, Circle } from 'react-konva';
+import { Stage, Layer, Ellipse, Circle, Path } from 'react-konva';
 import styled from 'styled-components';
 
 const RoomPaths = props => {
   const flightPath=(context, shape) => {
     context.beginPath();
-    context.moveTo(100, 50);
-
-    for(let i = 0; i < props.points.length-1; i++) {
-      // console.log(props.points[i], props.points[i+1])
-      context.lineTo(props.points[i], props.points[i+1]);
-    }
-    // context.quadraticCurveTo(props.points[0], props.points[1], props.points[2], props.points[3], props.points[4], props.points[5],  props.points[6],  props.points[7]);
-    // context.closePath();
+    context.moveTo(props.points[0], props.points[1]);
+    context.lineTo(props.points[2], props.points[3]);
     // (!) Konva specific method, it is very important
     context.fillStrokeShape(shape);
   }
-  return <Shape {...props} sceneFunc={flightPath} />
+  return <Path {...props} sceneFunc={flightPath} />
 }
 
 function Canvas(props) {
@@ -30,18 +24,34 @@ function Canvas(props) {
     pointList.push(location.x) 
     pointList.push(location.y)
   })
+
+  let part = []
+  let j = 0;
+  for(let i = 0; i <= pointList.length; i++){
+    while ( j <= pointList.length-1) {
+      part.push([pointList[j], pointList[j+1], pointList[j+2], pointList[j+3]])
+      j = j + 4
+    }
+  }
   
   return (
     <Stage width={window.innerWidth} height={window.innerHeight/2 + 200}>
       <Layer>
-        <RoomPaths
-          stroke="white"
-          strokeWidth={.5}
-          shadowColor="white"
-          shadowBlur={9}
-          shadowOpacity={2}
-          points={pointList}
-        />
+        {part.map((point, i) => {
+          return(
+            <RoomPaths
+              key={i}
+              stroke="white"
+              strokeWidth={.5}
+              shadowColor="white"
+              shadowBlur={9}
+              shadowOpacity={2}
+              points={point}
+            />
+            )
+          })
+        }
+        
         {props.vertices[0].map((point, i) => {
           return(
             <Ellipse 
