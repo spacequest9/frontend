@@ -149,6 +149,43 @@ class GameUI extends Component {
       .console{
         background-color: rgba(50, 115, 220, 0.3);
         color: white;
+        
+        .panel{
+          display: flex;
+          justify-content: space-evenly;
+          align-items: center;
+          padding: 2% 7%;
+          margin: 0 auto;
+          width: 50%;
+          
+          .btn{
+            background-color: rgba(50, 115, 220, 0.1);
+            width: 55px;
+            height: 53px;
+            padding-top: 15px;
+            border-radius: 2rem;
+            margin: 3% 0;
+            border: 1px solid lightslategrey;
+            box-shadow: 3px 3px 3px black;
+            text-shadow: 1px 1px 2px black;
+            user-select: none;
+            
+            &:active{
+              color: silver;
+              background-color: rgba(255, 255, 255, 0.1);
+              text-shadow: unset;
+              box-shadow: 1px 1px 7px black;
+            }
+          }
+
+          .mid{
+            width: 25%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+          }
+        }
       }
     `
     const DirectionBtn = styled.div`
@@ -179,12 +216,20 @@ class GameUI extends Component {
             </Grid.Column>
             <Grid.Column className="console">
               <Segment className="console">Here will go the readouts</Segment>
-              <Segment className="console">Control Container
-                <DirectionBtn className="console" onClick={() => this.flyTo("to_n")}> 
-                  North
+              <Segment className="console panel">
+                <DirectionBtn className="console btn" onClick={() => this.flyTo("to_w")}>
+                  West
                 </DirectionBtn>
-                <DirectionBtn className="console" onClick={() => this.flyTo("to_s")}>
-                  South
+                <div className="mid">
+                  <DirectionBtn className="console btn" onClick={() => this.flyTo("to_n")}> 
+                    North
+                  </DirectionBtn>
+                  <DirectionBtn className="console btn" onClick={() => this.flyTo("to_s")}>
+                    South
+                  </DirectionBtn>
+                </div>
+                <DirectionBtn className="console btn" onClick={() => this.flyTo("to_e")}> 
+                  East
                 </DirectionBtn>
               </Segment>
             </Grid.Column>
