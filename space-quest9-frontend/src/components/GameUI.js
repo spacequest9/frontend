@@ -5,9 +5,11 @@ import {
   Dropdown,
   Menu,
   Segment,
+  Icon,
 } from 'semantic-ui-react'
 import icon from './spacequestlogo-03.svg'
 import Canvas from './Canvas';
+import OutputConsole from './OutputConsole';
 import styled from 'styled-components';
 
 class GameUI extends Component {
@@ -125,30 +127,79 @@ class GameUI extends Component {
   
   render() {
     const Styles = styled.div`
-      .all{
-        background-image: url(${bgimage});
+      #menu {
+        border: 0 solid transparent;
+        background-color: black;
+        box-shadow: 0px 1px 1px #4D4CE3; 
       }
       .menuItem{
         margin:.30%;
-        border: 3px solid #484948;
-        background-color: #353535;
+        /* border: 3px solid #484948;
+        background-color: #353535; */
         border-radius: 25rem;
+        box-shadow: 0px 1px 1px #4D4CE3; 
         position: absolute;
         top: .25rem;
         z-index: 1;
-      }
-      .remove{
-        border: 3px solid red;
-        background-color: red;
       }
       .container{
         background-image: url(${bgimage});
         background-attachment: fixed;
         padding: 1.5% 1%;
       }
+      .letterpress { 
+        position: absolute;
+        left: 5.25rem;
+        top: .6rem;
+        margin: 0;
+        z-index: 1;
+        text-shadow: 0px 1px 1px #4D4CE3; 
+        color: #222; 
+        font: 3.3rem 'LeagueGothicRegular';
+      }
+
       .console{
         background-color: rgba(50, 115, 220, 0.3);
         color: white;
+        
+        .panel{
+          display: flex;
+          justify-content: space-evenly;
+          align-items: center;
+          padding: 2% 7%;
+          margin: 0 auto;
+          width: 50%;
+          
+          .btn{
+            background-color: rgba(50, 115, 220, 0.1);
+            text-shadow: 0px 1px 1px #4D4CE3; 
+            color: #222; 
+            width: 55px;
+            height: 53px;
+            font-size: 3em;
+            padding-top: 13px;
+            border-radius: 2rem;
+            margin: 3% 0;
+            border: 1px solid lightslategrey;
+            box-shadow: 3px 3px 3px black;
+            text-shadow: 1px 1px 2px black;
+            user-select: none;
+            
+            &:active{
+              color: silver;
+              background-color: rgba(255, 255, 255, 0.1);
+              text-shadow: unset;
+              box-shadow: 1px 1px 7px black;
+            }
+          }
+          
+          .mid{
+            width: 25%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+          }
+        }
       }
     `
     const DirectionBtn = styled.div`
@@ -159,9 +210,10 @@ class GameUI extends Component {
     ]
 
     return (
-      <Styles className="all">
-        <Menu size='mini' className="remove" inverted>
+      <Styles>
+        <Menu size='mini' id="menu" inverted>
           <img className="menuItem" src={icon} alt="" width="64px"/>
+          <h1 className='letterpress'>SpaceQuest9</h1>
           <Menu.Menu position='right'>
             <Dropdown item text='Menu'>
               <Dropdown.Menu >
@@ -178,13 +230,24 @@ class GameUI extends Component {
               <Canvas vertices={this.vertices} info={this.state} rooms={this.rooms}/>
             </Grid.Column>
             <Grid.Column className="console">
-              <Segment className="console">Here will go the readouts</Segment>
-              <Segment className="console">Control Container
-                <DirectionBtn className="console" onClick={() => this.flyTo("to_n")}> 
-                  North
+              <Segment className="console">
+                <h1>Constellation</h1>
+                <OutputConsole />
+              </Segment>
+              <Segment className="console panel">
+                <DirectionBtn className="console btn engraved" onClick={() => this.flyTo("to_w")}>
+                  <Icon name='caret left' />
                 </DirectionBtn>
-                <DirectionBtn className="console" onClick={() => this.flyTo("to_s")}>
-                  South
+                <div className="mid">
+                  <DirectionBtn className="console btn" onClick={() => this.flyTo("to_n")}> 
+                    <Icon name='caret up' />
+                  </DirectionBtn>
+                  <DirectionBtn className="console btn" onClick={() => this.flyTo("to_s")}>
+                    <Icon name='caret down' />
+                  </DirectionBtn>
+                </div>
+                <DirectionBtn className="console btn" onClick={() => this.flyTo("to_e")}> 
+                  <Icon name='caret right' />
                 </DirectionBtn>
               </Segment>
             </Grid.Column>

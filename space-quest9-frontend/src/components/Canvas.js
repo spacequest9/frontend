@@ -14,7 +14,7 @@ const RoomPaths = props => {
   return <Path {...props} sceneFunc={flightPath} />
 }
 
-function Canvas(props) {
+const Canvas = props => {
    
   console.log("State: ", props.vertices)
 
