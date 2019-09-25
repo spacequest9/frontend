@@ -5,6 +5,7 @@ import { Button, Form } from "semantic-ui-react";
 const Register = props => {
   const [user, setUser] = useState({
     username: "",
+    email: "",
     password1: "",
     password2: ""
   });
@@ -12,10 +13,10 @@ const Register = props => {
   const handleSubmit = event => {
     event.preventDefault();
     axios
-      .post("https://lambda-mud-test.herokuapp.com/api/registration", user)
+      .post("https://lambda-mud-be.herokuapp.com/api/registration", user)
       .then(res => {
         console.log('in handleSubmit',res);
-        props.history.push("/login");
+        // props.history.push("/login");
       })
       .catch(err => console.log("error from post", err));
   };
@@ -39,6 +40,17 @@ const Register = props => {
           width={16}
         />
       </Form.Group>
+      
+      <Form.Group>
+        <Form.Input
+            label="E-mail"
+            name="email"
+            type="text"
+            value={user.email}
+            onChange={event => handleChange(event)}
+            width={16}
+          />
+        </Form.Group>
 
       <Form.Group>
         <Form.Input
