@@ -45,7 +45,9 @@ const OutputConsole = props => {
        
     }
     .description-display{
-      border: 1px solid white;
+      border-width: 1px;
+      border-style: dotted dashed dotted solid;
+      border-color: white;
       height: 100%;
       width: 100%;
     }

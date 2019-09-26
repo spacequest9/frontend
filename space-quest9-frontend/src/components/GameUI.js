@@ -9,6 +9,7 @@ import {
 } from 'semantic-ui-react'
 import icon from './spacequestlogo-03.svg'
 import Canvas from './Canvas';
+import Controls from './Controls';
 import OutputConsole from './OutputConsole';
 import styled from 'styled-components';
 
@@ -171,8 +172,7 @@ class GameUI extends Component {
           width: 50%;
           
           .btn{
-            background-color: rgba(50, 115, 220, 0.1);
-            text-shadow: 0px 1px 1px #4D4CE3; 
+            background-color: rgba(50, 115, 220, 0.1); 
             color: #222; 
             width: 55px;
             height: 53px;
@@ -202,9 +202,6 @@ class GameUI extends Component {
         }
       }
     `
-    const DirectionBtn = styled.div`
-      border: 1px solid white;
-    `
     const colors = [
       // 'teal'
     ]
@@ -230,10 +227,8 @@ class GameUI extends Component {
               <Canvas vertices={this.vertices} info={this.state} rooms={this.rooms}/>
             </Grid.Column>
             <Grid.Column className="console">
-              {/* <Segment className="console"> */}
-                <h1>Constellation</h1>
                 <OutputConsole />
-              {/* </Segment> */}
+                <Controls flyTo={this.flyTo}/>
               {/* <Segment className="console panel">
                 <DirectionBtn className="console btn engraved" onClick={() => this.flyTo("to_w")}>
                   <Icon name='caret left' />
