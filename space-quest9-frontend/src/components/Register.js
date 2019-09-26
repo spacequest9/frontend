@@ -13,7 +13,7 @@ const Register = props => {
   const handleSubmit = event => {
     event.preventDefault();
     axios
-      .post("https://lambda-mud-be.herokuapp.com/api/registration", user)
+      .post("https://lambda-mud-be.herokuapp.com/api/registration/", user)
       .then(res => {
         console.log('in handleSubmit',res);
         // props.history.push("/login");
