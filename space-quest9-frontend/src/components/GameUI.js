@@ -41,7 +41,7 @@ class GameUI extends Component {
 
   rooms = [
     {
-      name: 'Sector 1',
+      name: 'Epsilon Cassi',
       description: 'Bright and green',
       x: 400,
       y: 300,
