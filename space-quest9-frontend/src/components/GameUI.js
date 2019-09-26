@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
-import bgimage from './bgimage.jpg';
 import {
   Grid,
   Dropdown,
   Menu,
   Segment,
   Icon,
-} from 'semantic-ui-react'
-import icon from './spacequestlogo-03.svg'
+} from 'semantic-ui-react';
+import Axios from 'axios';
+import icon from './spacequestlogo-03.svg';
+import bgimage from './bgimage.jpg';
 import Canvas from './Canvas';
 import Controls from './Controls';
 import OutputConsole from './OutputConsole';
@@ -25,6 +26,17 @@ class GameUI extends Component {
       to_e: 2,
       to_w: 3
     }
+  }
+
+  componentDidMount = () => {
+    console.log("Check")
+    Axios.get('https://lambda-mud-be.herokuapp.com/api/adv/rooms/')
+      .then(response => {
+        console.log(response)
+      })
+      .catch(error => {
+        console.log(error)
+      })
   }
 
   rooms = [
