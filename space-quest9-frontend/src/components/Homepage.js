@@ -8,14 +8,7 @@ const Homepage = props => {
   return (
     <div className="homepage-container">
       <Navbar />
-      <h1>SpaceQuest9</h1>
-
-      <Modal size="tiny" trigger={<Button>Log In</Button>} closeIcon>
-        <Modal.Header>Sign In</Modal.Header>
-        <Modal.Content>
-          <Login />
-        </Modal.Content>
-      </Modal>
+      {/* <h1>Space Quest 9</h1> */}
     </div>
   );
 };

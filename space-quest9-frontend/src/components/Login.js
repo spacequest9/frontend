@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { withRouter } from "react-router";
 import { Button, Form } from "semantic-ui-react";
 
 const Login = props => {
@@ -11,11 +12,11 @@ const Login = props => {
   const handleSubmit = event => {
     event.preventDefault();
     axios
-      .post("https://lambda-mud-test.herokuapp.com/api/login", user)
+      .post("https://lambda-mud-be.herokuapp.com/api/login/", user)
       .then(res => {
         console.log(res);
-        localStorage.setItem('token', res.data.token)
-        //props.history.push("/game");
+        localStorage.setItem('key', res.data.key)
+        props.history.push("/game");
       })
       .catch(err => console.log("error from post", err));
   };
@@ -62,4 +63,4 @@ const Login = props => {
   );
 };
 
-export default Login;
+export default withRouter(Login);
