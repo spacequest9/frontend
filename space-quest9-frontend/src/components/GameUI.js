@@ -230,11 +230,11 @@ class GameUI extends Component {
               <Canvas vertices={this.vertices} info={this.state} rooms={this.rooms}/>
             </Grid.Column>
             <Grid.Column className="console">
-              <Segment className="console">
+              {/* <Segment className="console"> */}
                 <h1>Constellation</h1>
                 <OutputConsole />
-              </Segment>
-              <Segment className="console panel">
+              {/* </Segment> */}
+              {/* <Segment className="console panel">
                 <DirectionBtn className="console btn engraved" onClick={() => this.flyTo("to_w")}>
                   <Icon name='caret left' />
                 </DirectionBtn>
@@ -249,7 +249,7 @@ class GameUI extends Component {
                 <DirectionBtn className="console btn" onClick={() => this.flyTo("to_e")}> 
                   <Icon name='caret right' />
                 </DirectionBtn>
-              </Segment>
+              </Segment> */}
             </Grid.Column>
           </Grid>
         </div>
