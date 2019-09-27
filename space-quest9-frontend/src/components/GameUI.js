@@ -2,9 +2,7 @@ import React, { Component } from 'react';
 import {
   Grid,
   Dropdown,
-  Menu,
-  Segment,
-  Icon,
+  Menu
 } from 'semantic-ui-react';
 import Axios from 'axios';
 import icon from './spacequestlogo-03.svg';
@@ -16,9 +14,11 @@ import styled from 'styled-components';
 
 class GameUI extends Component {
   state = {
+    name: 'Epsilon Cassi',
+    description: 'Bright and green',
     location: {
-      x: 300,
-      y: 50,
+      x: 97,
+      y: 330,
     },
     neighbors: {
       to_n: 0,
@@ -32,7 +32,7 @@ class GameUI extends Component {
     console.log("Check")
     Axios.get('https://lambda-mud-be.herokuapp.com/api/adv/rooms/')
       .then(response => {
-        console.log(response)
+        console.log(response.data.rooms)
       })
       .catch(error => {
         console.log(error)
@@ -41,64 +41,64 @@ class GameUI extends Component {
 
   rooms = [
     {
-      name: 'Epsilon Cassi',
-      description: 'Bright and green',
-      x: 400,
-      y: 300,
-      to_n: 1,
-      to_s: 2,
+      name: 'Epsilon Lyrae',
+      description: 'Famously known as being a double star – two stars in one with each star is also a double. The double double star!',
+      x: 250,
+      y: 60,
+      to_n: null,
+      to_s: 1,
       to_e: null,
-      to_w: 1
-    },
-    {
-      name: 'Sector 2',
-      description: 'Bright and green',
-      x: 100,
-      y: 200,
-      to_n: 2,
-      to_s: 2,
-      to_e: 0,
       to_w: null
     },
     {
-      name: 'Sector 3',
-      description: 'Bright and green',
-      x: 300,
-      y: 300,
+      name: 'Alpha Lyrae (Vega, Fidis, Harp Star)',
+      description: 'Brightest star in Lyra constellation and the fifth brightest star in the sky.',
+      x: 308,
+      y: 110,
       to_n: 0,
-      to_s: 1,
-      to_e: 0,
-      to_w: 1
+      to_s: 2,
+      to_e: null,
+      to_w: null
     },
     {
-      name: 'Sector 4',
-      description: 'Bright and green',
-      x: 500,
-      y: 200,
-      to_n: 0,
-      to_s: 1,
-      to_e: 0,
-      to_w: 1
+      name: 'Zeta1 Lyrae',
+      description: 'Contains as many as 7 individual starts. However is often over looked by near by neighbors.',
+      x: 288,
+      y: 168,
+      to_n: 1,
+      to_s: 5,
+      to_e: null,
+      to_w: 3
     },
     {
-      name: 'Sector 5',
-      description: 'Bright and green',
-      x: 100,
-      y: 50,
-      to_n: 0,
-      to_s: 1,
-      to_e: 0,
-      to_w: 1
+      name: 'Delta2 Lyrae',
+      description: 'Pulsating luminous giant star consisting of one super hot blue star, next to a yellow star.',
+      x: 187,
+      y: 183,
+      to_n: null,
+      to_s: 4,
+      to_e: 2,
+      to_w: null
     },
     {
-      name: 'Sector 6',
-      description: 'Bright and green',
-      x: 400,
-      y: 400,
+      name: 'Gamma Lyrae (Sulafat)',
+      description: 'Second-brightest star in the northern constellation and can be seen with the naked eye from Earth.',
+      x: 147,
+      y: 338,
+      to_n: 3,
+      to_s: null,
+      to_e: 5,
+      to_w: null
+    },
+    {
+      name: 'Beta Lyrae',
+      description: 'Made of 2 stars that are so close that their shapes are heavily distorted by mutual gravitation forces: the stars have ellipsoidal shapes.',
+      x: 236,
+      y: 325,
       to_n: 2,
-      to_s: 1,
-      to_e: 0,
-      to_w: 1
+      to_s: null,
+      to_e: null,
+      to_w: 4
     }
   ]
 
@@ -110,7 +110,7 @@ class GameUI extends Component {
   ]
 
   flyTo = direction => {
-    console.log(direction)
+    // console.log(direction)
     const goTo = this.state.neighbors
 
     if (this.rooms[goTo[direction]] !== null) {
@@ -214,9 +214,6 @@ class GameUI extends Component {
         }
       }
     `
-    const colors = [
-      // 'teal'
-    ]
 
     return (
       <Styles>
@@ -235,28 +232,12 @@ class GameUI extends Component {
         </Menu>
         <div className="container">
           <Grid celled columns={2} doubling stackable>
-            <Grid.Column color={colors[0]}>
+            <Grid.Column>
               <Canvas vertices={this.vertices} info={this.state} rooms={this.rooms}/>
             </Grid.Column>
             <Grid.Column className="console">
-                <OutputConsole />
-                <Controls flyTo={this.flyTo}/>
-              {/* <Segment className="console panel">
-                <DirectionBtn className="console btn engraved" onClick={() => this.flyTo("to_w")}>
-                  <Icon name='caret left' />
-                </DirectionBtn>
-                <div className="mid">
-                  <DirectionBtn className="console btn" onClick={() => this.flyTo("to_n")}> 
-                    <Icon name='caret up' />
-                  </DirectionBtn>
-                  <DirectionBtn className="console btn" onClick={() => this.flyTo("to_s")}>
-                    <Icon name='caret down' />
-                  </DirectionBtn>
-                </div>
-                <DirectionBtn className="console btn" onClick={() => this.flyTo("to_e")}> 
-                  <Icon name='caret right' />
-                </DirectionBtn>
-              </Segment> */}
+              <OutputConsole />
+              <Controls flyTo={this.flyTo}/>
             </Grid.Column>
           </Grid>
         </div>

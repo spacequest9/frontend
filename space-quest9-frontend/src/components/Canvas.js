@@ -16,7 +16,7 @@ const RoomPaths = props => {
 
 const Canvas = props => {
    
-  console.log("State: ", props.vertices)
+  // console.log("State: ", props.vertices)
 
   const pointList = []
 
@@ -24,13 +24,18 @@ const Canvas = props => {
     pointList.push(location.x) 
     pointList.push(location.y)
   })
+  console.log("PointList: ", pointList)
 
   let part = []
   let j = 0;
   for(let i = 0; i <= pointList.length; i++){
     while ( j <= pointList.length-1) {
       part.push([pointList[j], pointList[j+1], pointList[j+2], pointList[j+3]])
-      j = j + 4
+      j = j + 2
+      console.log("Part: ", part)
+    }
+    if(i+1 === pointList.length-1) {      // Specific for Lyrae Constellation. Can be removed for others to work.
+      part.push([pointList[pointList.length - 2], pointList[pointList.length - 1], pointList[4], pointList[5]]);
     }
   }
   

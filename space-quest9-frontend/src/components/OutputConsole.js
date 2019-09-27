@@ -10,7 +10,7 @@ import styled from 'styled-components';
 
 const OutputConsole = props => {
    
-  console.log("State: ", props.vertices)
+  // console.log("State: ", props.vertices)
 
   const Output = styled.div`
     display: flex;
