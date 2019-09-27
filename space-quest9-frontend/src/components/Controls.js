@@ -11,7 +11,7 @@ import styled from 'styled-components';
 
 const Controls = props => {
    
-  console.log("State: ", props)
+  // console.log("State: ", props)
 
   const Panel = styled.div`
 
