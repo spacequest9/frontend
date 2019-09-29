@@ -1,16 +1,17 @@
 import React from 'react';
-import {
-  Grid,
-  Dropdown,
-  Menu,
-  Segment,
-  Table
-} from 'semantic-ui-react'
+// import {
+//   Grid,
+//   Dropdown,
+//   Menu,
+//   Segment,
+//   Table,
+//   Divider
+// } from 'semantic-ui-react'
 import styled from 'styled-components';
 
 const OutputConsole = props => {
    
-  // console.log("State: ", props.vertices)
+  const { title, description, players } = props.current
 
   const Output = styled.div`
     display: flex;
@@ -34,6 +35,13 @@ const OutputConsole = props => {
       width: 50%;
       display: flex;
       flex-direction: column;
+      
+      .title-display-h2{
+        margin:0 0 3%;
+      }
+      .title-display-h3{
+        margin:0 0 4%;
+      }
     }
 
     .display-header{
@@ -46,7 +54,7 @@ const OutputConsole = props => {
     }
     .description-display{
       border-width: 1px;
-      border-style: dotted dashed dotted solid;
+      border-style: dotted dashed dotted none;
       border-color: white;
       height: 100%;
       width: 100%;
@@ -72,17 +80,33 @@ const OutputConsole = props => {
         height: 80%;
         border-style: dashed;
         border-width: 2px;
+
+        -webkit-animation: 8s linear 0s infinite move_in2;
+        animation: 8s linear 0s infinite move_in2;
       }
+      @-moz-keyframes move_in2 {100% {-moz-transform: rotate(360deg);}}
+      @-webkit-keyframes move_in2 {100% {-webkit-transform: rotate(360deg);}}
+      @keyframes move_in2 {100% {-webkit-transform: rotate(360deg); transform: rotate(360deg);}}
+
       .in3{
         width: 60%;
         height: 60%;
         border-style: solid dotted none;
         border-width: 2px;
+
+        -webkit-animation: 4s linear 0s infinite reverse move_in3;
+        animation: 4s linear 0s infinite reverse move_in3;
       }
+      @-moz-keyframes move_in3 {100% {-moz-transform: rotate(360deg);}}
+      @-webkit-keyframes move_in3 {100% {-webkit-transform: rotate(360deg);}}
+      @keyframes move_in3 {100% {-webkit-transform: rotate(360deg); transform: rotate(360deg);}}
+
       .in4{
         background-color: white;
+        border-radius: 3rem;
         width: 20%;
-        height: 20%;
+        height: 15%;
+
       }
     }
   `
@@ -91,13 +115,22 @@ const OutputConsole = props => {
       <Output>
         <div className='players-display'>
           <div className='inner'>
-            Players are here. will map over player information and display here.
+            <h4>Scanning Location...</h4>
+            <ul>
+              {players.map((player, i) => {
+                return (
+                  <li key={i}>{player}</li>            
+                )
+              })}
+            </ul> 
           </div>
         </div>
         <div className='middle'>
+          <h2 className='title-display-h2'>Location:</h2>
+          <h3 className='title-display-h3'>{title}</h3>
           <h3 className='display-header'>Description</h3>
           <div className='description-display'>
-            Description here
+            {description}
           </div>
         </div>
         <div className='graphic'>
@@ -110,8 +143,6 @@ const OutputConsole = props => {
           </div>
         </div>
       </Output>
-      <h3>Location:</h3>
-      <p>Constellation {}</p>
     </>
   );
 }
