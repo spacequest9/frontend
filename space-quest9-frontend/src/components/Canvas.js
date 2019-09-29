@@ -16,15 +16,15 @@ const RoomPaths = props => {
 
 const Canvas = props => {
    
-  // console.log("State: ", props.vertices)
+  // console.log("State props: ", props.cor)
 
-  const pointList = []
+  const pointList = [];
 
-  props.vertices[0].map(location => { 
+  props.vertices.map(location => { 
+    console.log(location.x)
     pointList.push(location.x) 
     pointList.push(location.y)
   })
-  console.log("PointList: ", pointList)
 
   let part = []
   let j = 0;
@@ -32,13 +32,12 @@ const Canvas = props => {
     while ( j <= pointList.length-1) {
       part.push([pointList[j], pointList[j+1], pointList[j+2], pointList[j+3]])
       j = j + 2
-      console.log("Part: ", part)
     }
     if(i+1 === pointList.length-1) {      // Specific for Lyrae Constellation. Can be removed for others to work.
       part.push([pointList[pointList.length - 2], pointList[pointList.length - 1], pointList[4], pointList[5]]);
     }
   }
-  
+  console.log('pointList: ', pointList)
   return (
     <Stage width={window.innerWidth} height={window.innerHeight/2 + 200}>
       <Layer>
@@ -57,7 +56,7 @@ const Canvas = props => {
           })
         }
         
-        {props.vertices[0].map((point, i) => {
+        {props.vertices.map((point, i) => {
           return(
             <Ellipse 
               key={i}
@@ -78,7 +77,6 @@ const Canvas = props => {
           name="player1" 
           x={props.info.location["x"]}
           y={props.info.location["y"]}
-          translate={props.info.location["x"], props.info.location["y"]}
           duration={0.5}
           radiusX={5}
           radiusY={5}

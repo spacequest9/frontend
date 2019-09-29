@@ -1,10 +1,10 @@
 import React from 'react';
 import {
-  Grid,
-  Dropdown,
-  Menu,
-  Segment,
-  Table,
+  // Grid,
+  // Dropdown,
+  // Menu,
+  // Segment,
+  // Table,
   Icon
 } from 'semantic-ui-react'
 import styled from 'styled-components';
