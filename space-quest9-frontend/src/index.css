@@ -5,10 +5,19 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: black;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+.ui.container {
+    width: 100%;
+    background-image: url(/static/media/bgimage.e2376693.jpg);
+    height: 500px;
+}
+
+h1.ui.inverted.header {
+  margin-top: 100px;
 }
