@@ -15,13 +15,10 @@ const RoomPaths = props => {
 }
 
 const Canvas = props => {
-   
-  // console.log("State props: ", props.cor)
 
   const pointList = [];
 
   props.vertices.map(location => { 
-    console.log(location.x)
     pointList.push(location.x) 
     pointList.push(location.y)
   })
@@ -37,7 +34,7 @@ const Canvas = props => {
       part.push([pointList[pointList.length - 2], pointList[pointList.length - 1], pointList[4], pointList[5]]);
     }
   }
-  console.log('pointList: ', pointList)
+
   return (
     <Stage width={window.innerWidth} height={window.innerHeight/2 + 200}>
       <Layer>

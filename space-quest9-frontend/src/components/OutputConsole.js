@@ -11,7 +11,7 @@ import styled from 'styled-components';
 
 const OutputConsole = props => {
    
-  const { title, description, players } = props.current
+  const { title, description, players, directionError } = props.current
 
   const Output = styled.div`
     display: flex;
@@ -53,6 +53,10 @@ const OutputConsole = props => {
        
     }
     .description-display{
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 3%;
       border-width: 1px;
       border-style: dotted dashed dotted none;
       border-color: white;
@@ -131,6 +135,7 @@ const OutputConsole = props => {
           <h3 className='display-header'>Description</h3>
           <div className='description-display'>
             {description}
+            <h3>{directionError}</h3>
           </div>
         </div>
         <div className='graphic'>
