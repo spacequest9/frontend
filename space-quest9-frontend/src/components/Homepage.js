@@ -1,10 +1,11 @@
-import React, { useState } from "react";
-import {
-  Header,
-  Icon
-} from 'semantic-ui-react'
+import React from "react";
+import { Header, Container } from "semantic-ui-react";
 import Navbar from "./Navbar";
-import bgImage from "./introbgi.jpg";
+import bgImage from "../assets/introbgi.jpg";
+import Ashley from "../assets/AshleyOwens.png";
+import Brett from "../assets/BrettMadrid.png"
+import Eric from "../assets/EricWhitcomb.png"
+import Arpita from "../assets/ArpitaSinha.png"
 
 const Homepage = props => {
   return (
@@ -40,8 +41,8 @@ const Homepage = props => {
       </Container>
       <div className="about-us">
         <Header
-          as="h2"
-          content="About Us"
+          as="h4"
+          content="Development Team"
           inverted
           style={{
             fontSize: "1.7em",
@@ -51,7 +52,48 @@ const Homepage = props => {
           }}
         />
         <div className="img-container">
-          
+          <div class="ui four column grid">
+            <div className="column">
+              <div class="ui fluid card">
+                <div class="image">
+                  <img src={Ashley} width="100" height="100"/>
+                </div>
+                <div class="content">
+                  <a class="header">Ashley Owens</a>
+                </div>
+              </div>
+            </div>
+            <div className="column">
+              <div class="ui fluid card">
+                <div class="image">
+                  <img src={Brett} />
+                </div>
+                <div class="content">
+                  <a class="header">Brett Madrid</a>
+                </div>
+              </div>
+            </div>
+            <div className="column">
+              <div class="ui fluid card">
+                <div class="image">
+                  <img src={Arpita} />
+                </div>
+                <div class="content">
+                  <a class="header">Arpita Sinha</a>
+                </div>
+              </div>
+            </div>
+            <div className="column">
+              <div class="ui fluid card">
+                <div class="image">
+                  <img src={Eric} />
+                </div>
+                <div class="content">
+                  <a class="header">Eric Whitcomb</a>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
