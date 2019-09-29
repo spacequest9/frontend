@@ -56,7 +56,7 @@ const Homepage = props => {
             <div className="column">
               <div class="ui fluid card">
                 <div class="image">
-                  <img src={Ashley} width="100" height="100"/>
+                  <img src={Ashley} alt=""/>
                 </div>
                 <div class="content">
                   <a class="header">Ashley Owens</a>
@@ -66,7 +66,7 @@ const Homepage = props => {
             <div className="column">
               <div class="ui fluid card">
                 <div class="image">
-                  <img src={Brett} />
+                  <img src={Brett} alt="" />
                 </div>
                 <div class="content">
                   <a class="header">Brett Madrid</a>
@@ -76,7 +76,7 @@ const Homepage = props => {
             <div className="column">
               <div class="ui fluid card">
                 <div class="image">
-                  <img src={Arpita} />
+                  <img src={Arpita} alt="" />
                 </div>
                 <div class="content">
                   <a class="header">Arpita Sinha</a>
@@ -86,7 +86,7 @@ const Homepage = props => {
             <div className="column">
               <div class="ui fluid card">
                 <div class="image">
-                  <img src={Eric} />
+                  <img src={Eric} alt=""/>
                 </div>
                 <div class="content">
                   <a class="header">Eric Whitcomb</a>
