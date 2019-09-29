@@ -87,7 +87,6 @@ const Register = props => {
         />
         <Button
           type="submit"
-          variant="raised"
           fullWidth
           color="primary"
         >Submit</Button>
