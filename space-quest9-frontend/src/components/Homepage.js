@@ -1,19 +1,7 @@
 import React, { useState } from "react";
 import {
-  Button,
-  Container,
-  Divider,
-  Grid,
   Header,
-  Icon,
-  Image,
-  List,
-  Menu,
-  Modal,
-  Responsive,
-  Segment,
-  Sidebar,
-  Visibility,
+  Icon
 } from 'semantic-ui-react'
 import Navbar from "./Navbar";
 import Login from "./Login";
