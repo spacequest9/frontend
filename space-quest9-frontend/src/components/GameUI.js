@@ -13,24 +13,27 @@ import OutputConsole from './OutputConsole';
 import styled from 'styled-components';
 
 class GameUI extends Component {
-  state = {
-    title: '',
-    description: '',
-    id: null,
-    location: {
-      x: null,
-      y: null,
-    },
-    neighbors: {
-      to_n: null,
-      to_s: null,
-      to_e: null,
-      to_w: null
-    },
-    players: [],
-    rooms: [],
-    vertices: [],
-    cor: [],
+  constructor(props){
+    super(props);
+    this.state = {
+      title: '',
+      description: '',
+      id: null,
+      location: {
+        x: null,
+        y: null,
+      },
+      neighbors: {
+        to_n: null,
+        to_s: null,
+        to_e: null,
+        to_w: null
+      },
+      players: [],
+      rooms: [],
+      vertices: [],
+      directionError: ""
+    }
   }
   
   componentDidMount = () => {
@@ -50,35 +53,21 @@ class GameUI extends Component {
       .catch(error => {
         console.log(error)
       })
+
     Axios.get('https://lambda-mud-be.herokuapp.com/api/adv/rooms/', options)
       .then(response => {
         let sortedRooms = response.data.rooms.sort((a, b) => (a.id > b.id) ? 1 : -1)
         
         this.setState({rooms: sortedRooms})
         // Map over the vertices with the location points from each room in room array on state
-        console.log(this.state.rooms)
         let vertices =  sortedRooms.map(location => {return {'x': location.locx, 'y': location.locy}})
-        
-        console.log(vertices)
-        let cor = []
-        this.state.rooms.map(location => {
-          cor.push(location.locx)
-          cor.push(location.locy)
-        })
         this.setState({vertices})
       })
       .catch(error => {
         console.log(error)
       })
-    // Axios.post('https://lambda-mud-be.herokuapp.com/api/adv/move/', {'room_id': 91}, options)
-    //   .then(response => {
-    //     console.log("Move: ", response)
-    //   })
-    //   .catch(error => {
-    //     console.log(error)
-    //   })
   }
-
+          
   // rooms = [
   //   {
   //     title: 'Epsilon Lyrae',
@@ -141,38 +130,71 @@ class GameUI extends Component {
   //     to_w: 4
   //   }
   // ]
-  
-  flyTo = direction => {
-    // console.log(direction)
-    const goTo = this.state.neighbors
     
-    if (this.rooms[goTo[direction]] !== null) {
-      if (goTo[direction] !== null) {
-        this.setState({ 
-          location: {
-            x: this.rooms[goTo[direction]].x,
-            y: this.rooms[goTo[direction]].y,
-          },
-          neighbors: {
-            to_n: this.rooms[goTo[direction]].to_n,
-            to_s: this.rooms[goTo[direction]].to_s,
-            to_e: this.rooms[goTo[direction]].to_e,
-            to_w: this.rooms[goTo[direction]].to_w
+    flyTo = direction => {
+      // console.log(direction)
+      const goTo = this.state.neighbors
+      console.log(goTo)
+      
+      if (this.state.rooms[goTo[direction]] !== null) {
+        if (goTo[direction] !== 0) {
+          console.log(goTo[direction])
+          const token = localStorage.getItem('key');
+          const options = {
+            headers: {
+              Authorization: `Token ${token}`
+            }
           }
+          Axios.post('https://lambda-mud-be.herokuapp.com/api/adv/move/', {'room_id': goTo[direction]}, options)
+          .then(response => {
+            console.log("Move: ", response)
+            const { title, description, id, locx, locy, n_to, s_to, e_to, w_to, players } = response.data.room;
+            this.setState({title, description, id, location: {x: locx, y: locy}, neighbors: {to_n: n_to, to_s: s_to, to_e: e_to, to_w: w_to}, players: [...players], directionError: ""})
         })
+        .catch(error => {
+          console.log(error)
+        })
+
         // console.log("x: ", this.rooms[goTo[direction]].x, "y: ", this.rooms[goTo[direction]].y)
       }
       else {
+        this.setState({directionError: 'There is nothing in that direction.'})
         console.log('There is nothing in that direction.')
       } 
     }
     else {
       console.log("Room does not have that index number")
     }
+    // if (this.rooms[goTo[direction]] !== 0) {
+    //   if (goTo[direction] !== null) {
+    //     this.setState({ 
+    //       location: {
+    //         x: this.rooms[goTo[direction]].x,
+    //         y: this.rooms[goTo[direction]].y,
+    //       },
+    //       neighbors: {
+    //         to_n: this.rooms[goTo[direction]].to_n,
+    //         to_s: this.rooms[goTo[direction]].to_s,
+    //         to_e: this.rooms[goTo[direction]].to_e,
+    //         to_w: this.rooms[goTo[direction]].to_w
+    //       }
+    //     })
+    //     // console.log("x: ", this.rooms[goTo[direction]].x, "y: ", this.rooms[goTo[direction]].y)
+    //   }
+    //   else {
+    //     console.log('There is nothing in that direction.')
+    //   } 
+    // }
+    // else {
+    //   console.log("Room does not have that index number")
+    // }
+  }
+  logout = () => {
+    localStorage.removeItem("key");
+    this.props.history.push("/")
   }
 
   render() {
-    console.log(this.state)
 
     const Styles = styled.div`
       #menu {
@@ -256,12 +278,7 @@ class GameUI extends Component {
           <img className="menuItem" src={icon} alt="" width="64px"/>
           <h1 className='letterpress'>SpaceQuest9</h1>
           <Menu.Menu position='right'>
-            <Dropdown item text='Menu'>
-              <Dropdown.Menu >
-                <Dropdown.Item>Home</Dropdown.Item>
-                <Dropdown.Item>About</Dropdown.Item>
-                <Dropdown.Item>Logout</Dropdown.Item>
-              </Dropdown.Menu>
+            <Dropdown item text='Logout' onClick={()=> this.logout()}>
             </Dropdown>
           </Menu.Menu>
         </Menu>
