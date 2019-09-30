@@ -44,6 +44,24 @@ class GameUI extends Component {
       }
     }
 
+    //Instantiates Randomized Room Algorithm for Randomly Generated points(rooms)
+    // Axios.post('https://lambda-mud-be.herokuapp.com/api/adv/createworld/', options)
+    // .then(response => {
+    //   console.log(response)
+    // })
+    // .catch(error => {
+    //   console.log(error)
+    // })
+    
+    // Instantiates Our Preset Constellation Room Studcture
+    // Axios.post('https://lambda-mud-be.herokuapp.com/api/adv/createourworld/', options)
+    //   .then(response => {
+    //     console.log(response)
+    //   })
+    //   .catch(error => {
+    //     console.log(error)
+    //   })
+
     Axios.get('https://lambda-mud-be.herokuapp.com/api/adv/init/', options)
       .then(response => {
         const { title, description, id, locx, locy, n_to, s_to, e_to, w_to, players } = response.data.room;
@@ -57,7 +75,7 @@ class GameUI extends Component {
     Axios.get('https://lambda-mud-be.herokuapp.com/api/adv/rooms/', options)
       .then(response => {
         let sortedRooms = response.data.rooms.sort((a, b) => (a.id > b.id) ? 1 : -1)
-        
+        console.log("Rooms: ", response)
         this.setState({rooms: sortedRooms})
         // Map over the vertices with the location points from each room in room array on state
         let vertices =  sortedRooms.map(location => {return {'x': location.locx, 'y': location.locy}})
@@ -200,7 +218,8 @@ class GameUI extends Component {
       #menu {
         border: 0 solid transparent;
         background-color: black;
-        box-shadow: 0px 1px 1px #4D4CE3; 
+        box-shadow: 0px 1px 1px #4D4CE3;
+        /* margin-bottom: 0;  */
       }
       .menuItem{
         margin:.30%;
@@ -278,14 +297,13 @@ class GameUI extends Component {
           <img className="menuItem" src={icon} alt="" width="64px"/>
           <h1 className='letterpress'>SpaceQuest9</h1>
           <Menu.Menu position='right'>
-            <Dropdown item text='Logout' onClick={()=> this.logout()}>
-            </Dropdown>
+            <Menu.Item name='logout' onClick={()=> this.logout()}/>
           </Menu.Menu>
         </Menu>
         <div className="container">
           <Grid celled columns={2} doubling stackable>
             <Grid.Column>
-              <Canvas vertices={this.state.vertices} cor={this.state.cor} info={this.state} rooms={this.state.rooms}/>
+              <Canvas vertices={this.state.vertices} info={this.state} rooms={this.state.rooms}/>
             </Grid.Column>
             <Grid.Column className="console">
               <OutputConsole current={this.state}/>
