@@ -118,16 +118,12 @@ const OutputConsole = props => {
     <>
       <Output>
         <div className='players-display'>
-          <div className='inner'>
-            <h4>Scanning Location...</h4>
-            <ul>
-              {players.map((player, i) => {
-                return (
-                  <li key={i}>{player}</li>            
-                )
-              })}
-            </ul> 
-          </div>
+          <h4>Scanning Location...</h4>
+          {players.map((player, i) => {
+            return (
+              <li key={i}>{player}</li>            
+            )
+          })}
         </div>
         <div className='middle'>
           <h2 className='title-display-h2'>Location:</h2>
