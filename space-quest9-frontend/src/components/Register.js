@@ -31,7 +31,8 @@ const Register = props => {
       .post("https://lambda-mud-be.herokuapp.com/api/registration/", user)
       .then(res => {
         console.log('in handleSubmit',res);
-        props.history.push("/");
+        localStorage.setItem('key', res.data.key)
+        props.history.push("/game");
       })
       .catch(err => console.log("error from post", err));
   };
