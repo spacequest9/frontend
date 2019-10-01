@@ -39,7 +39,7 @@ export default class MenuExampleSizeSmall extends Component {
     }
     `
 
-    const { activeItem } = this.state;
+    // const { activeItem } = this.state;
 
     return (
       <Styles>
