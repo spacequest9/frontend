@@ -53,7 +53,7 @@ class GameUI extends Component {
     //   console.log(error)
     // })
     
-    // Instantiates Our Preset Constellation Room Studcture
+    // Instantiates Our Preset Constellation Room Stucture
     // Axios.post('https://lambda-mud-be.herokuapp.com/api/adv/createourworld/', options)
     //   .then(response => {
     //     console.log(response)
