@@ -1,6 +1,21 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { Button, Form } from "semantic-ui-react";
+import { withRouter } from "react-router";
+import Button from "@material-ui/core/Button";
+import TextField from "@material-ui/core/TextField";
+
+const styles = theme => ({
+  paper: {
+    marginTop: theme.spacing.unit * 8,
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    padding: `${theme.spacing.unit * 5}px ${theme.spacing.unit * 5}px ${theme.spacing.unit *5}px`
+  },
+  container: {
+    maxWidth: '200px'
+  }
+})
 
 const Register = props => {
   const [user, setUser] = useState({
@@ -16,7 +31,8 @@ const Register = props => {
       .post("https://lambda-mud-be.herokuapp.com/api/registration/", user)
       .then(res => {
         console.log('in handleSubmit',res);
-        // props.history.push("/login");
+        localStorage.setItem('key', res.data.key)
+        props.history.push("/game");
       })
       .catch(err => console.log("error from post", err));
   };
@@ -28,60 +44,56 @@ const Register = props => {
     });
   };
 
+  const classes = props;
+
   return (
-    <Form onSubmit={event => handleSubmit(event)}>
-      <Form.Group>
-        <Form.Input
+    <form onSubmit={event => handleSubmit(event)}>
+        <TextField
           label="Username"
+          id="username"
           name="username"
-          type="text"
           value={user.username}
           onChange={event => handleChange(event)}
-          width={16}
+          fullWidth
         />
-      </Form.Group>
       
-      <Form.Group>
-        <Form.Input
-            label="E-mail"
+        <TextField
+            label="Email"
+            id="email"
             name="email"
-            type="text"
             value={user.email}
             onChange={event => handleChange(event)}
-            width={16}
+            fullWidth
           />
-        </Form.Group>
 
-      <Form.Group>
-        <Form.Input
+        <TextField
           label="Password"
+          id="password1"
           name="password1"
-          type="password"
           value={user.password1}
           onChange={event => handleChange(event)}
-          width={16}
-        />
-      </Form.Group>
-
-      <Form.Group>
-        <Form.Input
-          label="Repeat Password"
-          name="password2"
+          fullWidth
           type="password"
+        />
+
+
+        <TextField
+          label="Repeat Password"
+          id="password2"
+          name="password2"
           value={user.password2}
           onChange={event => handleChange(event)}
-          width={16}
+          fullWidth
+          type="password"
         />
-      </Form.Group>
         <Button
           type="submit"
-          positive
-          icon="checkmark"
-          labelPosition="right"
-          content="Submit"
-        />
-    </Form>
+          variant="raised"
+          fullWidth
+          color="primary"
+        >Submit</Button>
+    </form>
   );
 };
 
-export default Register;
+export default withRouter(Register);

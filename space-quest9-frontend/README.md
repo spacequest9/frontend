@@ -1,68 +1,31 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Spacequest9 Reademe.md
 
-## Available Scripts
+Backend 
+  the API is a Python/Django server.  The generate rooms algorithm iteratively creates room data and stores in a dictionary.  This data structure allows for the quickest lookup times and the best run time.  Space complexity is negligible with this data structure.
 
-In the project directory, you can run:
+  The endpoints are:
+  1. def createworld(request): # creates 100+ rooms. returns empty json object
+  2. def create_our_world(request): # creates custom star constellation room objects
+  3. def initialize(request): # initializes player and places at a starting room. 
+  4. def move(request): # allows a player to make a move.  
 
-### `npm start`
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Frontend
+The client was build using React with the following libraries:
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+  1. axios - for api calls
+  2. konva - canvas library for game display
+  3. semantic ui - for styling
+  4. styled-components - for styling
 
-### `npm test`
+The api calls made:
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+  1. createourworld - creates world grid layout
+  2. init - initializes world and puts player in a room
+  3. getrooms - retrieves rooms
+  4. move - allows player to move
 
-### `npm run build`
+The api calls are consumed by storing on state and then using that state to control display components.  A player starts out in a room that contains x and y coordinates that allow canvas mapping.  The room also contains data about other players in the room, which is displayed on the screen.  The room also contains information on what other room connect to it and this logic is connected to the directional display buttons on the screen that allow a player to move.
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Each time a player moves, state is changed and triggers another render.
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify

@@ -12,3 +12,30 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.ui.container {
+    width: 100%;
+    background-image: url(/static/media/bgimage.e2376693.jpg);
+    height: 390px;
+}
+
+h1.ui.inverted.header {
+  margin-top: 100px;
+}
+
+.img-container {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.img-container.ui.column {
+  width: 25%;
+}
+
+.about-us {
+  margin: 0;
+}
+
+.about-us .header {
+  margin: 0;
+}
